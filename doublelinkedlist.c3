@@ -12,7 +12,7 @@ struct Node
 fn Node* createNode(int value)
 { 
     Node* head_node = mem::new(Node, {.value = value, .next_node = null,
-    .previous_node = null});
+            .previous_node = null});
     return head_node;
 }
 
@@ -43,7 +43,7 @@ fn void DoubleLinkedList.freeNodes(DoubleLinkedList* this)
     }
 }
 
-fn void DoubleLinkedList.printInvert(DoubleLinkedList* this)
+fn void DoubleLinkedList.printInvert(DoubleLinkedList this)
 {
     Node* last_node;
     while(this.node)
@@ -54,28 +54,29 @@ fn void DoubleLinkedList.printInvert(DoubleLinkedList* this)
 
     while(last_node)
     {
-	    io::printf("%d\n", last_node.value);
+        io::printf("%d\n", last_node.value);
         last_node = last_node.previous_node;
     }
 }
 
-fn void DoubleLinkedList.print(DoubleLinkedList* this)
+fn void DoubleLinkedList.print(DoubleLinkedList this)
 { 
     while(this.node)
     { 
-	    io::printf("%d\n", this.node.value);
+        io::printf("%d\n", this.node.value);
         this.node = this.node.next_node;
     }
 }
 
 fn int main(String[] args)
 {
-    Node* head_node = createNode(1);
-    head_node.append(2);
+    Node* head_node = createNode(0);
+    head_node.append(1);
     DoubleLinkedList* ll = mem::new(DoubleLinkedList, { .node = head_node});
     defer ll.freeNodes();
+
+    ll.print();
     ll.printInvert();
 
-
-	return 0;
+    return 0;
 }
